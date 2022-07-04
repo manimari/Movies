@@ -33,26 +33,43 @@ def create_db(database_file_name) :
 
 def insert_one_user(database_file_name,email, password, name, last_name) : 
     con = sqlite3.connect(database_file_name) 
-    # try : 
-    hashed_password = generate_password_hash(password,method='sha256') 
-    query = f"""Insert Into User (email, password, name, last_name) values('{email}', '{hashed_password}', '{name}', '{last_name}')"""
-    cursor = con.cursor() 
-    cursor.execute(query)   
-    con.commit() 
-    # except : 
-        # print("An exception occurred") 
+    added = False 
+    try : 
+        hashed_password = generate_password_hash(password,method='sha256') 
+        query = f"""Insert Into User (email, password, name, last_name) values('{email}', '{hashed_password}', '{name}', '{last_name}')"""
+        cursor = con.cursor() 
+        cursor.execute(query)   
+        con.commit() 
+        added = True 
+    except : 
+        print("An exception occurred") 
     con.close()  
+    return added 
 
 def get_all_user(database_file_name): 
     con = sqlite3.connect(database_file_name) 
     try : 
-        query = f"Select * from User" 
+        query = "Select * from User" 
         cursor = con.cursor() 
         cursor.execute(query) 
         all_user = cursor.fetchall() 
     except : 
         print("An exception occurred") 
     con.close() 
+    return all_user  
+
+def get_user_by_email(database_file_name, email): 
+    con = sqlite3.connect(database_file_name) 
+    #print("email",email)
+    try : 
+        query = f"Select email,password from User where email='{email}'" 
+        cursor = con.cursor() 
+        cursor.execute(query) 
+        all_user = cursor.fetchone() 
+    except : 
+        print("An exception occurred") 
+    con.close() 
+    #print(all_user)
     return all_user  
 
 # current_working_directory=os.getcwd()+"\\" 
