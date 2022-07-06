@@ -10,3 +10,22 @@ The functiom search_movie(movie_name, page=1, adult=False) has as first input th
 The function get_actor_url(id) has as input the id of an actor and returns the url link with the information about that actor. 
 
 The function get_cast(movie_id) has as input the id of a movie, it gets the results from the corresponding link, replaces the profile path and the actor url with the corresponding whole link and returns the dictionary with all the information about that movie. 
+
+We have the register system, which is the endpoint http://localhost:5000/users/register with both methods POST and GET. 
+If the method is POST :
+The email, password, name and last name is asked by the user. After the user has given these information, these data are given as input at the function insert_one_user. This function tries to insert the new user into the database. If everything works properly the function returns True. If something goes wrong the function returns False. 
+If the function returns False then the output from the register template is generated. 
+If the function returns True. i.e. the new user is added, then we are redirected to the login system. 
+Is the method is GET : 
+The output from the register template is generated. 
+
+We have the login system, which is the endpoint http://localhost:5000/users/login with both methods POST and GET. 
+If the method is POST : 
+The email and the password is asked by the user. Using the function get_user_by_email, which has as input the database and the email, we check if the given email exists in the database. 
+If the email exists in the database then the given password is checked, i.e. if the password given by the user is equal to the one that is in the database. If the password is not correct then the output of the login template is generated and a message that the password is wrong appears. 
+If the password is correct then we are redirected to the endpoint http://localhost:5000/users/get_all . 
+If the given email doesn't exist in the database then the output of the login template is generated and a message that the email is wrong appears. 
+If the method is GET : 
+If the given email exists then we are redirected to the endpoint http://localhost:5000/users/get_all else the output of the login template is generated. 
+
+At the register template there is a link to get to the login system, if a user wants to be redirected there and also the other way around, at the login template there is a link to get to the register system, if a user wants to be redirected there. 
