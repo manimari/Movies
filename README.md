@@ -1,18 +1,28 @@
 # Movies
 Site connected with the movie db 
 
+________________________
+
 The function get_data_movie_by_id(id) has an input the id of a movie and returns a dictionary with all the information about that movie. 
 
 ________________________
 
 The function get_image_url(link, size="w500") has as first input the part of the link of the image which starts with a slash (/). The second input is the desired size of the image, which is set as default w500, so only if the size should be different we have to give a second input, i.e. about the size. This function returns the whole link of the image. 
 
+________________________
+
 The functiom search_movie(movie_name, page=1, adult=False) has as first input the name of a movie for which we want to get the information. The second input is the page we want to look at, which is set as default to be 1. The third input is whether the movie is allowed to be watched only by adults, which is set as default to be False, i.e. it is not strictly only for adults. This function replaces all poster paths with the whole link and returns a dictionary with all the information about the given movie. 
+
+________________________
 
 The function get_actor_url(id) has as input the id of an actor and returns the url link with the information about that actor. 
 
+________________________
+
 The function get_cast(movie_id) has as input the id of a movie, it gets the results from the corresponding link, replaces the profile path and the actor url with the corresponding whole link and returns the dictionary with all the information about that movie. 
 
+
+________________________
 
 We have the register system, which is the endpoint http://localhost:5000/users/register with both methods POST and GET. 
 
@@ -27,6 +37,8 @@ Is the method is GET :
 The output from the register template is generated. 
 
 
+________________________
+
 We have the login system, which is the endpoint http://localhost:5000/users/login with both methods POST and GET.  
 
 If the method is POST : 
@@ -40,5 +52,7 @@ If the method is GET :
 
 If the given email exists then we are redirected to the endpoint http://localhost:5000/users/get_all else the output of the login template is generated. 
 
+
+________________________
 
 At the register template there is a link to get to the login system, if a user wants to be redirected there and also the other way around, at the login template there is a link to get to the register system, if a user wants to be redirected there. 
