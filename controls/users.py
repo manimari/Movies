@@ -6,6 +6,7 @@ from models.queries_for_sql import insert_one_user, get_all_user, get_user_by_em
 import os 
 from werkzeug.security import check_password_hash 
 from dotenv import load_dotenv #pip install python-dotenv
+from controls.movies import route_movies 
 
 load_dotenv() 
 
@@ -14,6 +15,8 @@ database_file_name=current_working_directory+f"data\\{os.getenv('DATABASE_NAME')
   
 
 route_users=Blueprint("route_users",__name__)  
+
+route_users.register_blueprint(route_movies,url_prefix="/movies")  
 
 
 @route_users.route("/register/",methods=["GET","POST"]) 
@@ -49,7 +52,7 @@ def login():
             if not check_password_hash(username_data[1], password) : 
                 return render_template("login.html",error="password")
             session["email"] = email 
-            return redirect(url_for(".get_all"))
+            return redirect(url_for("route_users.route_movies.search_movies"))
         else:
             return render_template("login.html",error="email")    
 

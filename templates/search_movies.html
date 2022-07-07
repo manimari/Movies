@@ -1,0 +1,32 @@
+{% extends "base_page.html" %} 
+
+{% block my_title %}Search Movies{% endblock %} 
+
+{% block my_head %} 
+<style>
+    .my_card{
+        display: inline-block;
+    }
+</style>
+
+{% endblock %}
+
+{% block my_body %} 
+  <form class="d-flex" role="search" action="#" method="get">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name = "search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form> 
+
+  {% for movie in movie_data %} 
+    <div class="my_card" >
+        <div class="card" style="width: 18rem;">
+            <img src={{movie["poster_path"]}} class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{movie["title"]}}</h5>
+            <p class="card-text">{{movie["overview"]}}</p>
+            <a href="/movie/{{movie["id"]}}" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div> 
+    </div>
+  {% endfor %}
+{% endblock %}

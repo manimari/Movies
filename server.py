@@ -2,7 +2,8 @@ from functions.check_file_existence import check_file_existence
 from models.queries_for_sql import create_db 
 import os 
 from flask import Flask, session, redirect, url_for
-from controls.users import route_users
+from controls.users import route_users 
+from controls.movies import route_movies
 from dotenv import load_dotenv #pip install python-dotenv
 
 load_dotenv() 
@@ -16,11 +17,12 @@ if check_file_existence(database_file_name) == False :
 app=Flask(__name__) 
 app.secret_key=os.getenv("SECRET_KEY") #apokriptografei to session key automata
 app.register_blueprint(route_users,url_prefix="/users") 
+app.register_blueprint(route_movies,url_prefix="/movies") 
 
 @app.route("/") 
 def home() : 
     if "email" in session : 
-        return redirect(url_for("route_users.get_all"))
+        return redirect(url_for("route_movies.search_movies"))
     else : 
         return redirect(url_for("route_users.login"))
 
