@@ -1,0 +1,45 @@
+{% extends "base_page.html" %} 
+
+{% block my_title %}{{movie["title"]}}{% endblock %} 
+
+{% block my_head %} 
+
+{% endblock %}
+
+{% block my_body %} 
+
+    <br> 
+    
+    <div style="text-align:center;">
+        
+            <img src={{movie["poster_path"]}} width="300" height="400"/>
+
+            <p><h1>{{movie["title"]}}</h1></p>
+        
+    </div> 
+
+    <br><br> 
+
+    <div><u><h4>Overview</h4></u>{{movie["overview"]}}</div> 
+
+    <br><br> 
+
+    <div><u><h4>Cast</h4></u>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Actor</th>
+            <th scope="col">Character</th>
+          </tr>
+        </thead> 
+        {% for actor in cast %}
+        <tbody> 
+          <tr>
+            <td>{{actor["name"]}} </td>
+            <td>{{actor["character"]}}</td>
+          </tr> 
+        </tbody> 
+        {% endfor %}
+      </table>
+    </div>
+{% endblock %}

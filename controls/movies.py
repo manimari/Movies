@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 import sys 
 from pathlib import Path 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from models.queries_movie_db import search_movie
+from models.queries_movie_db import search_movie, get_data_movie_by_id, get_cast
 import os 
 from werkzeug.security import check_password_hash 
 from dotenv import load_dotenv #pip install python-dotenv
@@ -19,7 +19,11 @@ def search_movies() :
     search = request.args.get("search") 
     if search != None : 
         movie_array = search_movie(search, page=1, adult=False) 
-        print(movie_array)
     else : 
         movie_array = []
     return render_template("search_movies.html", movie_data = movie_array) 
+
+@route_movies.route("/<id>",methods=["GET","POST"]) 
+def movie_id(id) :
+    movie_id_array = get_data_movie_by_id(id) 
+    return render_template("movie.html", movie = movie_id_array, cast = get_cast(id))     

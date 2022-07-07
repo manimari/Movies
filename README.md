@@ -56,3 +56,13 @@ If the given email exists then we are redirected to the endpoint http://localhos
 ________________________
 
 At the register template there is a link to get to the login system, if a user wants to be redirected there and also the other way around, at the login template there is a link to get to the register system, if a user wants to be redirected there. 
+
+
+________________________ 
+
+We have the logout system, which is the endpoint http://localhost:5000/users/logout . The user's email is removed from the session and we are redirected to the login system. 
+
+________________________ 
+
+We have the endpoint http://localhost:5000/movies/search . If we give at the search box the name of a movie then this movie is searched by the function search_movie(search, page=1, adult=False) and it returns an array of the movie data with the given name. If the given name doesn't exist then the variable search is equal to None and the array is empty. In each case the output of the search_movies template is generated considering the movie_array. This html generates a card with the image of each movie of the given name, the title, the overview and a button to see more which redirect us to the endpoint http://localhost:5000/movies/<id> where id is the movie_id. This endpoint uses the function get_data_movie_by_id(id) to get an array with the data for the specific movie and the output of the movie template is generated considering the array with the data of the movie and the cast of that movie, which is the output of the function get_cast(id). 
+The movie.html shows the image, the title, the overview and the cast of that movie. 

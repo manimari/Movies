@@ -11,7 +11,8 @@ def get_data_movie_by_id(id) :
     req=requests.get(link)
     result=req.text 
     result = json.loads(result) 
-    return result
+    result["poster_path"] = get_image_url(result["poster_path"])
+    return result 
 
 def get_image_url(link, size="w500") : 
    link = f"https://image.tmdb.org/t/p/{size}{link}"
