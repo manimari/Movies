@@ -26,4 +26,4 @@ def search_movies() :
 @route_movies.route("/<id>",methods=["GET","POST"]) 
 def movie_id(id) :
     movie_id_array = get_data_movie_by_id(id) 
-    return render_template("movie.html", movie = movie_id_array, cast = get_cast(id))     
+    return render_template("movie.html", movie = movie_id_array, cast = get_cast(id))    
