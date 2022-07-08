@@ -4,12 +4,18 @@
 
 {% block my_head %} 
 
+<style>
+    .my_card{
+        display: inline-block;
+    }
+</style> 
+
 {% endblock %}
 
 {% block my_body %} 
 
     <br> 
-    
+
     <div style="text-align:center;">
         
             <img src={{movie["poster_path"]}} width="300" height="400"/>
@@ -24,22 +30,19 @@
 
     <br><br> 
 
-    <div><u><h4>Cast</h4></u>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Actor</th>
-            <th scope="col">Character</th>
-          </tr>
-        </thead> 
-        {% for actor in cast %}
-        <tbody> 
-          <tr>
-            <td>{{actor["name"]}} </td>
-            <td>{{actor["character"]}}</td>
-          </tr> 
-        </tbody> 
-        {% endfor %}
-      </table>
+    <div><u><h4>Cast</h4></u> 
+        {% for actor in cast%} 
+        <div class="my_card" >
+            <div class="card" style="width: 18rem;">
+                <img src={{actor["profile_path"]}} class="card-img-top" alt="..." width="10" height="300">
+                <div class="card-body">
+                <h5 class="card-title">{{actor["name"]}}</h5>
+                <p class="card-text">{{actor["character"]}}</p>
+                <a href="/actors/{{actor["id"]}}" class="btn btn-primary" >See more</a>
+                </div>
+            </div> 
+        </div>
+      {% endfor %}
+
     </div>
 {% endblock %}

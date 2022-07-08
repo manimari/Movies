@@ -43,5 +43,11 @@ def get_cast(movie_id) :
         actor["actor_url"] = get_actor_url(actor["id"])
     return result 
 
+def get_actor_data(actor_url) : 
+    req=requests.get(actor_url)
+    result=req.text 
+    result = json.loads(result) 
+    result["profile_path"] = get_image_url(result["profile_path"]) 
+    return result
 
 

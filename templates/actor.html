@@ -1,0 +1,30 @@
+{% extends "base_page.html" %} 
+
+{% block my_title %}{{actor["name"]}}{% endblock %} 
+
+{% block my_head %} 
+
+{% endblock %}
+
+{% block my_body %} 
+
+    <br> 
+
+    <div style="text-align:center;">
+        
+            <img src={{actor["profile_path"]}} width="300" height="400"/>
+
+            <p><h1>{{actor["name"]}}</h1></p>
+        
+    </div> 
+
+    <br><br> 
+
+    <div><u><h4>Biography</h4></u>{{actor["biography"]}}</div> 
+
+    <br><br> 
+
+    <div><u><h4>Birthday</h4></u>{{actor["birthday"]}}</div> 
+    
+    </div>
+{% endblock %}

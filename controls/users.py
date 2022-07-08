@@ -64,10 +64,15 @@ def login():
 
 @route_users.route("/get_all/",methods=["GET"])
 def get_all(): 
-    dict_to_send = {} 
-    dict_to_send["data"] = get_all_user(database_file_name)
-    dict_to_send["message"]='These are the users .'
-    return jsonify(dict_to_send) 
+    if "email" in session: 
+        dict_to_send = {} 
+        dict_to_send["data"] = get_all_user(database_file_name)
+        dict_to_send["message"]='These are the users .'
+        return jsonify(dict_to_send) 
+    else : 
+        return redirect(url_for(".login")) 
+
+
 
 @route_users.route("/logout/") 
 def logout(): 

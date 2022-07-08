@@ -15,15 +15,25 @@ database_file_name=current_working_directory+f"data\\{os.getenv('DATABASE_NAME')
 route_movies=Blueprint("route_movies",__name__)  
 
 @route_movies.route("/search/",methods=["GET","POST"]) 
-def search_movies() :
-    search = request.args.get("search") 
-    if search != None : 
-        movie_array = search_movie(search, page=1, adult=False) 
+def search_movies() : 
+    if "email" in session: 
+        search = request.args.get("search") 
+        if search != None : 
+            movie_array = search_movie(search, page=1, adult=False) 
+        else : 
+            movie_array = []
+        return render_template("search_movies.html", movie_data = movie_array) 
     else : 
-        movie_array = []
-    return render_template("search_movies.html", movie_data = movie_array) 
+        return redirect(url_for("route_users.login"))
+
+
+
 
 @route_movies.route("/<id>",methods=["GET","POST"]) 
-def movie_id(id) :
-    movie_id_array = get_data_movie_by_id(id) 
-    return render_template("movie.html", movie = movie_id_array, cast = get_cast(id))    
+def movie_id(id) :  
+    if "email" in session: 
+        movie_id_array = get_data_movie_by_id(id) 
+        return render_template("movie.html", movie = movie_id_array, cast = get_cast(id))    
+    else : 
+        return redirect(url_for("route_users.login"))
+   
