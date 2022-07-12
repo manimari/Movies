@@ -47,12 +47,11 @@ def login():
         email=request.form["email"]#"email"-> einai to name tou input sto html
         password=request.form["password"]#"password"-> einai to name tou input sto html
         username_data=get_user_by_email(database_file_name, email) 
-        print(username_data)
         if username_data != None: 
             if not check_password_hash(username_data[1], password) : 
                 return render_template("login.html",error="password")
             session["email"] = email 
-            return redirect(url_for("route_users.route_movies.search_movies"))
+            return redirect(url_for("home"))
         else:
             return render_template("login.html",error="email")    
 
@@ -78,3 +77,12 @@ def get_all():
 def logout(): 
     session.pop("email",None)#dioxnoume apo to session to username
     return redirect(url_for(".login")) #to onoma tis sunartisis
+
+
+@route_users.route("/user/") 
+def user(): 
+    if "email" in session: 
+        username_data=get_user_by_email(database_file_name, session["email"]) 
+        return render_template("user.html", my_name = username_data[2])
+    else : 
+        return redirect(url_for(".login")) 

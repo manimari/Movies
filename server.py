@@ -1,7 +1,7 @@
 from functions.check_file_existence import check_file_existence 
 from models.queries_for_sql import create_db 
 import os 
-from flask import Flask, session, redirect, url_for
+from flask import Flask, session, redirect, url_for, render_template
 from controls.users import route_users 
 from controls.movies import route_movies 
 from controls.actors import route_actors
@@ -24,7 +24,8 @@ app.register_blueprint(route_actors,url_prefix="/actors")
 @app.route("/") 
 def home() : 
     if "email" in session : 
-        return redirect(url_for("route_movies.search_movies"))
+        #return redirect(url_for("route_movies.search_movies")) 
+        return render_template("home.html")
     else : 
         return redirect(url_for("route_users.login"))
 

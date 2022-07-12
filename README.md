@@ -3,6 +3,18 @@ Site connected with the movie db
 
 ________________________
 
+Instructions : 
+
+You should download the files. 
+
+You should complete the API_KEY and the SECRET_KEY at the .env file. 
+
+At a terminal you should write python .\server.py 
+
+In the browser you should hit http://localhost:5000 and search for movies. 
+
+________________________
+
 The function get_data_movie_by_id(id) has an input the id of a movie and returns a dictionary with all the information about that movie. 
 
 ________________________
@@ -64,5 +76,20 @@ We have the logout system, which is the endpoint http://localhost:5000/users/log
 
 ________________________ 
 
-We have the endpoint http://localhost:5000/movies/search . If we give at the search box the name of a movie then this movie is searched by the function search_movie(search, page=1, adult=False) and it returns an array of the movie data with the given name. If the given name doesn't exist then the variable search is equal to None and the array is empty. In each case the output of the search_movies template is generated considering the movie_array. This html generates a card with the image of each movie of the given name, the title, the overview and a button to see more which redirect us to the endpoint http://localhost:5000/movies/<id> where id is the movie_id. This endpoint uses the function get_data_movie_by_id(id) to get an array with the data for the specific movie and the output of the movie template is generated considering the array with the data of the movie and the cast of that movie, which is the output of the function get_cast(id). 
+We have the endpoint http://localhost:5000/movies/search . 
+
+If we are logged in : 
+
+If we give at the search box the name of a movie then this movie is searched by the function search_movie(search, page=1, adult=False) and it returns an array of the movie data with the given name. If the given name doesn't exist then the variable search is equal to None and the array is empty. In each case the output of the search_movies template is generated considering the movie_array. This html generates a card with the image of each movie of the given name, the title, the overview and a button to see more which redirect us to the endpoint http://localhost:5000/movies/<id> where id is the movie_id. This endpoint uses the function get_data_movie_by_id(id) to get an array with the data for the specific movie and the output of the movie template is generated considering the array with the data of the movie and the cast of that movie, which is the output of the function get_cast(id). 
 The movie.html shows the image, the title, the overview and the cast of that movie. 
+
+If we are not logged in, then we are redirected to the login system. 
+
+________________________  
+
+We have the endpoint http://localhost:5000/actors/<id> where id is the id of an actor. 
+
+If we are logged in , this endpoint uses the function get_actor_url(id) to get the url of that actor and the function get_actor_data(actor_url) to get an array with the data for the specific actor and the output of the actor template is generated considering the array with the data of the actor. 
+The actor.html shows the image, the name, the biography and the birthday of that actor. 
+
+If we are not logged in, then we are redirected to the login system. 

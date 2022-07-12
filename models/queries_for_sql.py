@@ -62,7 +62,7 @@ def get_user_by_email(database_file_name, email):
     con = sqlite3.connect(database_file_name) 
     #print("email",email)
     try : 
-        query = f"Select email,password from User where email='{email}'" 
+        query = f"Select email,password, name from User where email='{email}'" 
         cursor = con.cursor() 
         cursor.execute(query) 
         all_user = cursor.fetchone() 
@@ -71,6 +71,7 @@ def get_user_by_email(database_file_name, email):
     con.close() 
     #print(all_user)
     return all_user  
+
 
 # current_working_directory=os.getcwd()+"\\" 
 # database_file_name=current_working_directory+"data\\movies.db" 
