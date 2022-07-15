@@ -25,7 +25,10 @@ def search_movie(movie_name, page=1, adult=False) :
     result = json.loads(result) 
     result = result["results"] 
     for movie in result : 
-        movie["poster_path"] = get_image_url(movie["poster_path"])
+        if movie["poster_path"] != None : 
+            movie["poster_path"] = get_image_url(movie["poster_path"]) 
+        else : 
+            movie["poster_path"] = "https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"
     return result 
 
 def get_actor_url(id) : 
@@ -39,7 +42,10 @@ def get_cast(movie_id) :
     result = json.loads(result) 
     result = result["cast"] 
     for actor in result : 
-        actor["profile_path"] = get_image_url(actor["profile_path"]) 
+        if actor["profile_path"] != None : 
+            actor["profile_path"] = get_image_url(actor["profile_path"]) 
+        else : 
+            actor["profile_path"] = "https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"
         actor["actor_url"] = get_actor_url(actor["id"])
     return result 
 
