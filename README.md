@@ -93,3 +93,7 @@ If we are logged in , this endpoint uses the function get_actor_url(id) to get t
 The actor.html shows the image, the name, the biography and the birthday of that actor. 
 
 If we are not logged in, then we are redirected to the login system. 
+
+________________________   
+
+The image that we have that at the base_page is from taken from Google and especially from https://www.google.com/search?q=movies+logo&tbm=isch&ved=2ahUKEwiIlfXvy_r4AhXM5KQKHexFC88Q2-cCegQIABAA&oq=movies+logo&gs_lcp=CgNpbWcQAzIFCAAQgAQyBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB46BggAEB4QCFAAWNsLYIsNaAJwAHgAgAHbAogBzgqSAQcwLjMuMC4zmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=7zTRYsjhJczJkwXsi634DA#imgrc=ojHPSuirZLfgZM . 
