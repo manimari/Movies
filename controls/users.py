@@ -83,6 +83,7 @@ def logout():
 def user(): 
     if "email" in session: 
         username_data=get_user_by_email(database_file_name, session["email"]) 
-        return render_template("user.html", my_name = username_data[2])
+        return render_template("user.html", my_data = username_data)
     else : 
         return redirect(url_for(".login")) 
+
