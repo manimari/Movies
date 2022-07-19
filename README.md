@@ -96,4 +96,17 @@ If we are not logged in, then we are redirected to the login system.
 
 ________________________   
 
+
+We have the endpoint http://localhost:5000/users/user .  
+
+If we are logged in : 
+
+The output of the user template is generated. We can see the information of the user, i.e. the name, the last name and the email address. There are also two options, to change the password and to delete the account. Clicking on the corresponding option we are redirected to the respective endpoint (http://localhost:5000/users/change_password/ or http://localhost:5000/users/delete_account/). 
+At the option to change the password the user should input the old password and twice the new password. After checking if the old password is correct and if the new password is the same at both inputs then the password is changed and this is done by the model change_password_by_email. In each case the output of the change_password template is generated. 
+At the option to delete the account the user should verify that the account should be deleted. This is done by the model delete_account_by_email. The output of the delete_account template is generated. The user's email is removed from the session and we are redirected to the register system. 
+
+
+If we are not logged in, then we are redirected to the login system. 
+________________________   
+
 The image that we have that at the base_page is from taken from Google and especially from https://www.google.com/search?q=movies+logo&tbm=isch&ved=2ahUKEwiIlfXvy_r4AhXM5KQKHexFC88Q2-cCegQIABAA&oq=movies+logo&gs_lcp=CgNpbWcQAzIFCAAQgAQyBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB46BggAEB4QCFAAWNsLYIsNaAJwAHgAgAHbAogBzgqSAQcwLjMuMC4zmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=7zTRYsjhJczJkwXsi634DA#imgrc=ojHPSuirZLfgZM . 

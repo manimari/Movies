@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 import sys 
 from pathlib import Path 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from models.queries_for_sql import insert_one_user, get_all_user, get_user_by_email
+from models.queries_for_sql import insert_one_user, get_all_user, get_user_by_email, change_password_by_email, delete_account_by_email
 import os 
 from werkzeug.security import check_password_hash 
 from dotenv import load_dotenv #pip install python-dotenv
@@ -21,12 +21,6 @@ route_users.register_blueprint(route_movies,url_prefix="/movies")
 
 @route_users.route("/register/",methods=["GET","POST"]) 
 def register(): 
-    # new_user = request.get_json() 
-    # dict_to_send = {} 
-    # insert_one_user(new_user["username"], new_user["password"]) 
-    # dict_to_send["message"]=f'The user with username {new_user["username"]} is registered.'
-    # #return jsonify(dict_to_send) 
-
     if request.method=="POST": 
         email=request.form["email"] 
         password=request.form["password"] 
@@ -84,6 +78,46 @@ def user():
     if "email" in session: 
         username_data=get_user_by_email(database_file_name, session["email"]) 
         return render_template("user.html", my_data = username_data)
+    else : 
+        return redirect(url_for(".login")) 
+
+@route_users.route("/change_password/", methods=["POST", "GET"]) 
+def change(): 
+    if "email" in session: 
+        if request.method=="POST": 
+            old_password=request.form["old_password"] 
+            new_password=request.form["new_password"] 
+            verify_password=request.form["verify_password"] 
+            username_data=get_user_by_email(database_file_name, session["email"]) 
+            if not check_password_hash(username_data[1], old_password) : 
+                return render_template("change_password.html", error = "old_password") 
+            if new_password != verify_password : 
+                return render_template("change_password.html", error = "verify")
+            change_password=change_password_by_email(database_file_name, session["email"], new_password) 
+            if change_password == False : 
+                return render_template("change_password.html", error = "change") 
+            else : 
+                return render_template("change_password.html", error = "ok")  
+        else : 
+            return render_template("change_password.html")
+    else : 
+        return redirect(url_for(".login")) 
+
+@route_users.route("/delete_account/", methods=["POST", "GET"]) 
+def delete(): 
+    if "email" in session: 
+        if request.method=="POST": 
+            if request.form["button"] == "Delete" : 
+                deleted = delete_account_by_email(database_file_name, session["email"]) 
+                if deleted == False : 
+                    return render_template("delete_account.html") 
+                else : 
+                    session.pop("email",None)
+                    return redirect(url_for(".register")) 
+            elif request.form["button"] == "Cancel" :   
+                return redirect(url_for(".user"))
+        else : 
+            return render_template("delete_account.html")
     else : 
         return redirect(url_for(".login")) 
 
